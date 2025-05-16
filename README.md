@@ -168,3 +168,20 @@ X.Y.Z.I
   - Z: Revision version number. To be changed for documentation updates, small
     changes, small bug fixes
   - I: Number of Indicators already built into the platform
+
+Build the Package
+=================
+
+To build the package, run:
+
+```bash
+python -m pip install --upgrade build
+rm -r dist
+python -m build
+```
+
+To upload the package to PyPI, run:
+
+```bash
+twine upload dist/*
+```
