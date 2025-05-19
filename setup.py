@@ -22,6 +22,11 @@ import os.path
 import codecs  # To use a consistent encoding
 import setuptools
 
+
+_pkg_root = "pwb_backtrader"
+_internal = setuptools.find_packages(where=_pkg_root)
+_public = ["backtrader"] + ["backtrader." + p for p in _internal]
+
 here = os.path.abspath(os.path.dirname(__file__))
 
 # Get the long description from the relevant file
@@ -33,7 +38,7 @@ pname = "pwb_backtrader"
 
 # Get the version ... execfile is only on Py2 ... use exec + compile + open
 vname = "version.py"
-with open(os.path.join(pname, vname)) as f:
+with open(os.path.join(pname, vname), encoding="utf-8") as f:
     exec(compile(f.read(), vname, "exec"))
 
 # Generate links
@@ -91,22 +96,22 @@ setuptools.setup(
     keywords=["trading", "development"],
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
-    packages=setuptools.find_packages() + ["backtrader"],
-    package_dir={"backtrader": "backtrader", "pwb_backtrader": "pwb_backtrader"},
+    packages=["backtrader"] + _public,  # every sub-package
+    package_dir={"backtrader": _pkg_root},
+    include_package_data=True,  # pick up data files
+    install_requires=["tqdm"],
+    extras_require={"plotting": ["matplotlib"]},
+    entry_points={"console_scripts": ["btrun=backtrader.btrun:btrun"]},
     # packages=['backtrader', '],
     # List run-time dependencies here.
     # These will be installed by pip when your
     # project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=["tqdm"],
     # List additional groups of dependencies here
     # (e.g. development dependencies).
     # You can install these using the following syntax, for example:
     # $ pip install -e .[dev,test]
-    extras_require={
-        "plotting": ["matplotlib"],
-    },
     # If there are data files included in your packages that need to be
     # installed, specify them here.  If using Python 2.6 or less, then these
     # have to be included in MANIFEST.in as well.
@@ -120,6 +125,5 @@ setuptools.setup(
     # "scripts" keyword. Entry points provide cross-platform support and allow
     # pip to create the appropriate form of executable for the target platform.
     # entry_points={'console_scripts': ['sample=sample:main',],},
-    entry_points={"console_scripts": ["btrun=backtrader.btrun:btrun"]},
     scripts=["tools/bt-run.py"],
 )
