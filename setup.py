@@ -91,7 +91,8 @@ setuptools.setup(
     keywords=["trading", "development"],
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
-    packages=setuptools.find_packages(exclude=["docs", "docs2", "samples"]),
+    packages=setuptools.find_packages() + ["backtrader"],
+    package_dir={"backtrader": "backtrader", "pwb_backtrader": "pwb_backtrader"},
     # packages=['backtrader', '],
     # List run-time dependencies here.
     # These will be installed by pip when your
