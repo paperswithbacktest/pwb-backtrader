@@ -69,3 +69,5 @@ samples2/
 datas/*.py
 
 .idea/
+
+.DS_Store
