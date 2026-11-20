@@ -1,3 +1,21 @@
+.. warning::
+
+   **pwb-backtrader is frozen (November 2026).** This fork of backtrader, published on PyPI as
+   ``pwb-backtrader`` (imported as ``backtrader``), receives no new features. **1.9.78.125 is
+   its last version.** Papers With Backtest is moving to
+   `Tradewind <https://github.com/paperswithbacktest/tradewind>`_, a new engine written from
+   scratch under Apache 2.0 that runs strategies written against the backtrader API. Tradewind is
+   checked against this fork's output on the Papers With Backtest catalogue (about 4 200 daily
+   NAV paths, compared bar by bar).
+
+   * Existing installs keep working: ``pip install pwb-backtrader==1.9.78.125``.
+   * New code: ``pip install tradewind``, then ``import tradewind as bt``. The
+     `migration guide <https://tradewind.paperswithbacktest.com/migrating-from-backtrader/>`_
+     lists the differences.
+   * Only a fix that blocks an existing Papers With Backtest deployment may still be released
+     here, until those deployments have moved to Tradewind. After that the repository will be
+     archived (read-only).
+
 backtrader
 ==========
 
